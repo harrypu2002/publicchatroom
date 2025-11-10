@@ -78,7 +78,7 @@ chatrooms.addEventListener('click',function(e){
         // fetch get chats
         chatroom.getChats((data) => {
             domli.newli(data);
-        })
+        });
 
     }
 

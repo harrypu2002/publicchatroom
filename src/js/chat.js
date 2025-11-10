@@ -1,5 +1,5 @@
 import { db } from "./firebase.js";
-import { collection,addDoc,onSnapshot,Timestamp,query,where,orderBy } from "firebase/firestore";
+import { collection,addDoc,onSnapshot,Timestamp,query,where,orderBy,getDocs,deleteDoc,doc } from "firebase/firestore";
 
 export function ChatRoom(room,username){
 
@@ -80,6 +80,38 @@ export function ChatRoom(room,username){
         localStorage.setItem('username',curuser);
         console.log(`Username changed to ${curuser}`);
     };
+
+    // Delete all messages every 15s
+    const deleteAllMessages = () => {
+
+        let deleteinter = setInterval(async() => {
+
+            try{
+
+                const getdatas = await getDocs(dbRef);
+
+                // stop function call if no data in firebase
+                if(getdatas.empty){
+                    console.log("No message to delete");
+                    clearInterval(deleteinter); // stop the interval
+                    return;
+                }
+
+                getdatas.forEach(async(getdata) => {
+                    await deleteDoc(doc(db,'chats',getdata.id));
+                });
+
+                console.log("All messages deleted successfully.");
+
+            }catch(error){
+                console.error("Error deleting message : ",error);
+            }
+
+        },15000);
+
+    };
+
+    deleteAllMessages();
 
     return {addChat,getChats,updateChatroom,updateUsername};
 
