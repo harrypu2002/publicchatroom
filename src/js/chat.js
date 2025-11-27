@@ -51,8 +51,8 @@ export function ChatRoom(room,username){
         }
 
         unsubscribe = onSnapshot(
-            query(dbRef,where('room','==',curroom),orderBy('created_at')),
-            docSnap => {
+            query(dbRef,where('room','==',curroom),orderBy('created_at'))
+            ,(docSnap) => {
 
             docSnap.docChanges().forEach(item => {
                 // console.log(item);
@@ -66,19 +66,19 @@ export function ChatRoom(room,username){
 
         });
 
-        console.log(unsubscribe);
+        // console.log(unsubscribe);
 
     };
 
     const updateChatroom = (newroom) => {
         curroom = newroom;
-        console.log(`Room Changed to ${curroom}`);
+        // console.log(`Room Changed to ${curroom}`);
     };
 
     const updateUsername = (newusername) => {
         curuser = newusername;
         localStorage.setItem('username',curuser);
-        console.log(`Username changed to ${curuser}`);
+        // console.log(`Username changed to ${curuser}`);
     };
 
     // Delete all messages every 15s

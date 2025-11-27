@@ -117,7 +117,7 @@ https://date-fns.org/
 1. Install
 npm install date-fns --save
 
-2. Import in src/main.js (or) src/js/uielement.js (or) src/js/lielement.js
+2. Import in src/main.js (or) src/js/uielement.js and src/js/lielement.js
 import { format } from "date-fns";
 
 const formatteddate = format(new Date(createdtime),"do MMM yyyy");
@@ -159,3 +159,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 click project > Manual Deploy > Deploy latest commit
 
 --------------------------------------------------------
+
+=> Create Index Error
+
+installHook.js:1 [2025-11-27T04:35:22.702Z] @firebase/firestore: Firestore (12.4.0): Uncaught Error in snapshot listener: FirebaseError: [code=failed-precondition]: The query requires an index. You can create it here:
+
+Firebase Console => Firestore => Indexes => Composite
+Collection ID = chats
+Fields to index
+    1 Field path = room         Ascending
+    2 Field path = create_at    Ascending
+Click "Create"

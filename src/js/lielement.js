@@ -24,6 +24,10 @@ export function Lielements(chatul){
 
     };
 
-    return {newli};
+    const resetli = () => {
+        chatul.innerHTML = "";
+    };
+
+    return {newli,resetli};
 
 };
